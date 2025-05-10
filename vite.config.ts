@@ -24,7 +24,7 @@ export default defineConfig({
 			entry: path.resolve(__dirname, 'src/index.ts'),
 			name: getPackageNameCamelCase(),
 			formats: ['es'],
-			fileName: `${getPackageNameCamelCase()}.js`,
+			fileName: `index`,
 		},
 	},
 	test: {
