@@ -1,0 +1,10 @@
+name: imagor-url-builder
+
+services:
+  builder-test-imagor:
+    image: shumc/imagor:latest
+    environment:
+      PORT: 8000
+      IMAGOR_SECRET: 123456789
+    ports:
+      - "8000:8000"
