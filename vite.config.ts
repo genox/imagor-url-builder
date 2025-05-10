@@ -26,6 +26,7 @@ export default defineConfig({
 			formats: ['es'],
 			fileName: `index`,
 		},
+		minify: true,
 	},
 	test: {
 		globals: true,
