@@ -11,17 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+      
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Setup Yarn Berry
-        run: |
-          corepack enable
-          yarn set version from package
 
       - name: Install dependencies
         run: yarn install --immutable
