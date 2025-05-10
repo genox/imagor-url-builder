@@ -33,6 +33,6 @@ jobs:
       - name: Publish to NPM
         run: |
           cd build
-          npm publish --access public
+          npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

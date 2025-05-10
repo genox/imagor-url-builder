@@ -382,6 +382,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@genox/imagor-url-builder@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@genox/imagor-url-builder@workspace:."
+  dependencies:
+    "@epic-web/config": "npm:^1.20.1"
+    "@types/express": "npm:^5.0.1"
+    "@types/jsdom": "npm:^21.1.7"
+    "@types/node": "npm:^22.13.5"
+    "@vitest/coverage-v8": "npm:^3.0.7"
+    concurrently: "npm:^9.1.2"
+    copyfiles: "npm:^2.4.1"
+    dts-bundle-generator: "npm:^9.5.1"
+    eslint: "npm:^9.21.0"
+    jiti: "npm:^2.4.2"
+    lint-staged: "npm:^15.4.3"
+    node-fetch: "npm:^3.3.2"
+    prettier: "npm:^3.5.2"
+    rimraf: "npm:^6.0.1"
+    ts-node: "npm:^10.9.2"
+    typescript: "npm:^5.7.3"
+    vite: "npm:^6.2.0"
+    vitest: "npm:^3.0.7"
+    wait-on: "npm:^8.0.3"
+  languageName: unknown
+  linkType: soft
+
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -3296,32 +3322,6 @@ __metadata:
   checksum: 10c0/f9f652c957983634ded1e7f02da3b559a0d4cc210fca3792cb67f1b153623c9c42efdc1c4121af171e295444459fc4a9201101fb041b1104a3c000bccb188337
   languageName: node
   linkType: hard
-
-"imagor-url-builder@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "imagor-url-builder@workspace:."
-  dependencies:
-    "@epic-web/config": "npm:^1.20.1"
-    "@types/express": "npm:^5.0.1"
-    "@types/jsdom": "npm:^21.1.7"
-    "@types/node": "npm:^22.13.5"
-    "@vitest/coverage-v8": "npm:^3.0.7"
-    concurrently: "npm:^9.1.2"
-    copyfiles: "npm:^2.4.1"
-    dts-bundle-generator: "npm:^9.5.1"
-    eslint: "npm:^9.21.0"
-    jiti: "npm:^2.4.2"
-    lint-staged: "npm:^15.4.3"
-    node-fetch: "npm:^3.3.2"
-    prettier: "npm:^3.5.2"
-    rimraf: "npm:^6.0.1"
-    ts-node: "npm:^10.9.2"
-    typescript: "npm:^5.7.3"
-    vite: "npm:^6.2.0"
-    vitest: "npm:^3.0.7"
-    wait-on: "npm:^8.0.3"
-  languageName: unknown
-  linkType: soft
 
 "import-fresh@npm:^3.2.1":
   version: 3.3.1

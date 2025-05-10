@@ -1,5 +1,5 @@
 {
-  "name": "imagor-url-builder",
+  "name": "@genox/imagor-url-builder",
   "description": "A library for building URLs to use with imagor",
   "author": "Oliver Studer <o.studer@me.com>",
   "license": "MIT",

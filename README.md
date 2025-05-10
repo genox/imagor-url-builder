@@ -1,7 +1,7 @@
 # Imagor URL Builder
 
 [![CI](https://github.com/genox/imagor-url-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/genox/imagor-url-builder/actions/workflows/ci.yml)
-[![npm version](https://badge.fury.io/js/imagor-url-builder.svg)](https://www.npmjs.com/package/imagor-url-builder)
+[![npm version](https://badge.fury.io/js/@genox%2Fimagor-url-builder.svg)](https://www.npmjs.com/package/@genox/imagor-url-builder)
 
 A TypeScript library for building URLs to use with the [Imagor](https://github.com/cshum/imagor) image processing server.
 
@@ -9,16 +9,16 @@ A TypeScript library for building URLs to use with the [Imagor](https://github.c
 
 ```bash
 # Using npm
-npm install imagor-url-builder
+npm install @genox/imagor-url-builder
 
 # Using yarn
-yarn add imagor-url-builder
+yarn add @genox/imagor-url-builder
 ```
 
 ## Basic Usage
 
 ```typescript
-import { imagorClient } from 'imagor-url-builder';
+import { imagorClient } from '@genox/imagor-url-builder';
 
 // Initialize the client
 const client = await imagorClient({
