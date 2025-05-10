@@ -3,11 +3,11 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import packageJson from './package.json'
 
-const getPackageName = () => {
-	return packageJson.name
+const getPackageName = (): string => {
+	return packageJson.name as string
 }
 
-const getPackageNameCamelCase = () => {
+const getPackageNameCamelCase = (): string => {
 	try {
 		return getPackageName().replace(/-./g, (char) => char[1].toUpperCase())
 	} catch (err) {
@@ -23,10 +23,11 @@ export default defineConfig({
 		lib: {
 			entry: path.resolve(__dirname, 'src/index.ts'),
 			name: getPackageNameCamelCase(),
-			formats: ['es'],
-			fileName: `index`,
+			formats: ['es', 'cjs'],
+			fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
 		},
 		minify: true,
+		ssr: true,
 	},
 	test: {
 		globals: true,
