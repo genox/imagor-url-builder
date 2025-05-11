@@ -30,6 +30,18 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Update version in build package.json to match tag
+        run: |
+          # Extract tag version (remove 'v' prefix if present)
+          TAG_VERSION=${GITHUB_REF#refs/tags/}
+          TAG_VERSION=${TAG_VERSION#v}
+          
+          # Update the version in the build/package.json
+          jq ".version = \"$TAG_VERSION\"" build/package.json > build/package.json.tmp
+          mv build/package.json.tmp build/package.json
+          
+          echo "Updated build/package.json version to $TAG_VERSION"
+
       - name: Publish to NPM
         run: |
           cd build

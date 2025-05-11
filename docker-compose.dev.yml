@@ -4,7 +4,7 @@ services:
   builder-test-imagor:
     image: shumc/imagor:latest
     environment:
-      PORT: 8000
+      PORT: 8001
       IMAGOR_SECRET: 123456789
     ports:
-      - "8000:8000"
+      - "8001:8001"
