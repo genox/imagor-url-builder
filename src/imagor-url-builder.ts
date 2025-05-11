@@ -557,48 +557,6 @@ export class ImagorUrlBuilder {
 	}
 
 	/**
-	 * Convenience method to set the image format to TIFF.
-	 *
-	 * @param quality Optional quality level (0-100)
-	 * @returns The current ImagorUrlBuilder instance for method chaining
-	 */
-	tiff(quality?: number): this {
-		this.format('tiff')
-		if (quality !== undefined) {
-			this.quality(quality)
-		}
-		return this
-	}
-
-	/**
-	 * Convenience method to set the image format to AVIF.
-	 *
-	 * @param quality Optional quality level (0-100)
-	 * @returns The current ImagorUrlBuilder instance for method chaining
-	 */
-	avif(quality?: number): this {
-		this.format('avif')
-		if (quality !== undefined) {
-			this.quality(quality)
-		}
-		return this
-	}
-
-	/**
-	 * Convenience method to set the image format to JPEG 2000.
-	 *
-	 * @param quality Optional quality level (0-100)
-	 * @returns The current ImagorUrlBuilder instance for method chaining
-	 */
-	jp2(quality?: number): this {
-		this.format('jp2')
-		if (quality !== undefined) {
-			this.quality(quality)
-		}
-		return this
-	}
-
-	/**
 	 * Sets the source image URL.
 	 *
 	 * @param src Image source URL or path
@@ -608,22 +566,6 @@ export class ImagorUrlBuilder {
 	src(src: string, order = 99): this {
 		this.parts.push({ order, value: src })
 		return this
-	}
-
-	/**
-	 * Creates a copy of this ImagorUrlBuilder instance.
-	 *
-	 * @returns A new ImagorUrlBuilder instance with the same settings
-	 */
-	clone(): ImagorUrlBuilder {
-		const newBuilder = new ImagorUrlBuilder({
-			imagorServer: this.imagorServer,
-			imagorServerKey: this.imagorServerKey,
-			defaultFilters: Array.from(this.filters),
-			cacheTtl: this.cacheTtl,
-		})
-		newBuilder.parts = [...this.parts]
-		return newBuilder
 	}
 
 	/**
@@ -662,6 +604,7 @@ export class ImagorUrlBuilder {
 	/**
 	 * Generates and returns the complete image URL.
 	 * The URL is cached for repeated calls with the same parameters.
+	 * After generating the URL, the internal state is reset.
 	 *
 	 * @returns Promise resolving to the generated URL string
 	 */
@@ -675,12 +618,26 @@ export class ImagorUrlBuilder {
 
 		// Return from cache if available
 		if (this.memoCache.has(cacheKey)) {
-			return this.memoCache.get(cacheKey)!
+			const url = this.memoCache.get(cacheKey)!
+			
+			// Reset state after retrieving from cache
+			this.parts = []
+			this.filters.clear()
+			
+			return url
 		}
 
 		const urlPromise = this.generateUrl()
 		this.memoCache.set(cacheKey, urlPromise)
-		return urlPromise
+		
+		// Get the URL then reset state
+		const url = await urlPromise
+		
+		// Reset state after generating URL
+		this.parts = []
+		this.filters.clear()
+		
+		return url
 	}
 
 	private async generateUrl(): Promise<string> {
