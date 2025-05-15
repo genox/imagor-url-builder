@@ -25,7 +25,6 @@ export class ImagorUrlBuilder {
 	private readonly imagorServerKey: string
 	private readonly cacheTtl: number
 	private readonly methodsOrderMap: Map<string, number>
-	private memoCache: Map<string, Promise<string>> = new Map()
 
 	// Pre-compute method order array once
 	private static readonly METHODS_ORDER = [
@@ -62,11 +61,6 @@ export class ImagorUrlBuilder {
 		this.methodsOrderMap = new Map(
 			ImagorUrlBuilder.METHODS_ORDER.map((method, index) => [method, index]),
 		)
-	}
-
-	// Static factory method
-	static create(config: ImagorUrlBuilderConfig): ImagorUrlBuilder {
-		return new ImagorUrlBuilder(config)
 	}
 
 	private orderLookup(method: string): number {
@@ -603,40 +597,17 @@ export class ImagorUrlBuilder {
 
 	/**
 	 * Generates and returns the complete image URL.
-	 * The URL is cached for repeated calls with the same parameters.
 	 * After generating the URL, the internal state is reset.
 	 *
 	 * @returns Promise resolving to the generated URL string
 	 */
 	async getUrl(): Promise<string> {
-		// Generate a cache key from current state
-		const cacheKey = JSON.stringify({
-			src: this.src,
-			parts: this.parts,
-			filters: Array.from(this.filters),
-		})
+		const url = await this.generateUrl()
 
-		// Return from cache if available
-		if (this.memoCache.has(cacheKey)) {
-			const url = this.memoCache.get(cacheKey)!
-			
-			// Reset state after retrieving from cache
-			this.parts = []
-			this.filters.clear()
-			
-			return url
-		}
-
-		const urlPromise = this.generateUrl()
-		this.memoCache.set(cacheKey, urlPromise)
-		
-		// Get the URL then reset state
-		const url = await urlPromise
-		
 		// Reset state after generating URL
 		this.parts = []
 		this.filters.clear()
-		
+
 		return url
 	}
 
